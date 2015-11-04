@@ -1,18 +1,27 @@
 package wordGame;
 
+import java.util.Scanner;
 
 public class Points {
 	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+
+		System.out.print("Enter current points: ");
+
+		String input = in.nextLine();
+		Scanner s = new Scanner(input);
+
+		s.skip("\\(");
 
 		int X = 0;
+		X = Integer.parseInt(s.findInLine("\\d*"));
+		s.skip(",");
 		int Y = 0;
+		Y = Integer.parseInt(s.findInLine("\\d*"));
 
-		String symbols = ">>><<<~>>>~^^^";
+		System.out.print("Enter symbols: ");
+		String symbols = in.next();
 
-		char right = '>';
-		char down = 'v';
-		char left = '<';
-		char up = '^';
 		char symbol = '~';
 		int count = 0;
 
@@ -22,38 +31,60 @@ public class Points {
 			}
 			boolean conditon = (count % 2 == 0);
 
-			if (conditon) {
-				if (symbols.charAt(i) == right) {
-					X++;
-				}
-				if (symbols.charAt(i) == down) {
-					Y++;
-				}
-				if (symbols.charAt(i) == left) {
-					X--;
-				}
-				if (symbols.charAt(i) == up) {
-					Y--;
-				}
-			} else {
+			X = resultX(X, symbols.charAt(i), conditon);
+			Y = resultY(Y, symbols.charAt(i), conditon);
 
-				if (symbols.charAt(i) == right) {
-					X--;
-				}
-				if (symbols.charAt(i) == down) {
-					Y--;
-				}
-				if (symbols.charAt(i) == left) {
-					X++;
-				}
-				if (symbols.charAt(i) == up) {
-					Y++;
-				}
-
-			}
 		}
-
 		System.out.println(X + " " + Y);
 
 	}
+
+	public static int resultX(int X, char symbol, boolean count) {
+
+		char right = '>';
+		char left = '<';
+
+		if (symbol == right) {
+			if (count) {
+				X--;
+			} else {
+				X++;
+			}
+		}
+		if (symbol == left) {
+
+			if (!count) {
+				X++;
+			} else {
+				X--;
+			}
+		}
+
+		return X;
+	}
+
+	public static int resultY(int Y, char symbol, boolean count) {
+
+		char down = 'v';
+		char up = '^';
+
+		if (symbol == down) {
+			if (count) {
+				Y--;
+			} else {
+				Y++;
+			}
+
+		}
+		if (symbol == up) {
+			if (!count) {
+				Y++;
+			} else {
+				Y--;
+			}
+		}
+
+		return Y;
+	}
+
 }
