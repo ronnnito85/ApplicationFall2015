@@ -3,10 +3,14 @@ package wordGame;
 import java.util.Scanner;
 
 public class WordGame {
+
 	public static void main(String[] args) {
-		
-		
-		String word = "go";
+
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Enter the find word:");
+		String word = input.nextLine();
+
 		int count = 0;
 		String word1 = "";
 		String word2 = "";
@@ -17,13 +21,10 @@ public class WordGame {
 		String word7 = "";
 		String word8 = "";
 
-		char[][] crossWord = { { 'r', 'v', 'i', 'i' },
-								{ 'n', 'n', 'v', 'n' },
-								{ 'g', 'o', 'g', 'o' }, 
-								{ 'n', 'v', 'v', 'a' },
-								{ 'i', 'g', 'o', 'r' }, 
-								{ 'q', 'i', 'i', 'n' },
-								{ 'n', 'a', 'v', 'i' } };	
+		char[][] crossWord = { { 'r', 'i', 'i', 'i' }, { 'g', 'p', 'i', 'o' },
+				{ 'g', 'o', 'g', 'o' }, { 'n', 'i', 'v', 'a' },
+				{ 'i', 'g', 'o', 'r' }, { 'o', 'i', 'i', 'g' },
+				{ 'n', 'a', 'v', 'i' } };
 
 		for (int i = 0; i < crossWord.length; i++) {
 			for (int j = 0; j < crossWord[i].length; j++) {
@@ -37,12 +38,15 @@ public class WordGame {
 					if (limit1 && crossWord[i][j + k] == word.charAt(k)) {
 						word1 += word.charAt(k);
 						if (k == word.length() - 1) {
+
 							if (word1.equals(word)) {
 								count++;
 							}
 							word1 = "";
-
 						}
+
+					} else {
+						word1 = "";
 					}
 
 					if (limit2 && crossWord[i][j - k] == word.charAt(k)) {
@@ -52,8 +56,9 @@ public class WordGame {
 								count++;
 							}
 							word2 = "";
-
 						}
+					} else {
+						word2 = "";
 					}
 
 					if (limit3 && crossWord[i + k][j] == word.charAt(k)) {
@@ -63,8 +68,9 @@ public class WordGame {
 								count++;
 							}
 							word3 = "";
-
 						}
+					} else {
+						word3 = "";
 					}
 
 					if (limit4 && crossWord[i - k][j] == word.charAt(k)) {
@@ -74,8 +80,9 @@ public class WordGame {
 								count++;
 							}
 							word4 = "";
-
 						}
+					} else {
+						word4 = "";
 					}
 
 					if (limit1 && limit3
@@ -88,8 +95,9 @@ public class WordGame {
 							word5 = "";
 
 						}
+					} else {
+						word5 = "";
 					}
-
 					if (limit2 && limit4
 							&& crossWord[i - k][j - k] == word.charAt(k)) {
 						word6 += word.charAt(k);
@@ -100,8 +108,9 @@ public class WordGame {
 							word6 = "";
 
 						}
+					} else {
+						word6 = "";
 					}
-
 					if (limit2 && limit3
 							&& crossWord[i + k][j - k] == word.charAt(k)) {
 						word7 += word.charAt(k);
@@ -112,6 +121,8 @@ public class WordGame {
 							word7 = "";
 
 						}
+					} else {
+						word7 = "";
 					}
 					if (limit1 && limit4
 							&& crossWord[i - k][j + k] == word.charAt(k)) {
@@ -123,8 +134,9 @@ public class WordGame {
 							word8 = "";
 
 						}
+					} else {
+						word8 = "";
 					}
-
 				}
 
 			}
@@ -132,5 +144,5 @@ public class WordGame {
 
 		System.out.println(count);
 	}
+
 }
-	
